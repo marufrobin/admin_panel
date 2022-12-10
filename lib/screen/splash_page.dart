@@ -35,9 +35,10 @@ class SplashPage extends StatelessWidget {
               )),
           ElevatedButton(
             style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0),
                 backgroundColor: MaterialStateProperty.all(Color(0xffEAEAEA)),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)))),
+                    borderRadius: BorderRadius.circular(24)))),
             onPressed: () {},
             child: Container(
               padding: EdgeInsets.symmetric(
