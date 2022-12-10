@@ -15,7 +15,7 @@ class SplashPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Text(
               "Wellcome to My App",
@@ -32,7 +32,52 @@ class SplashPage extends StatelessWidget {
                 "images/r.png",
                 scale: 2,
               )),
-          Expanded(flex: 2, child: Placeholder())
+          ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Color(0xffEAEAEA)),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)))),
+            onPressed: () {},
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.36,
+                  vertical: MediaQuery.of(context).size.height * 0.02),
+              child: Text(
+                "SIGN UP",
+                style: TextStyle(
+                    color: Color(0xff0B23AC),
+                    fontSize: 16,
+                    fontFamily: "Nunito",
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Text(
+            "Already a Member?",
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: "Nunito",
+            ),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.376,
+                  vertical: MediaQuery.of(context).size.height * 0.02),
+              child: Text(
+                "Sign In",
+                style: TextStyle(
+                    color: Color(0xffEAEAEA),
+                    fontSize: 16,
+                    fontFamily: "Nunito",
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
         ],
       ),
     );
