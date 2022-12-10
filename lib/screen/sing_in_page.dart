@@ -13,6 +13,9 @@ class SignInPage extends StatelessWidget {
         elevation: 0,
         title: const Text("Sign In Page"),
       ),
+      body: Column(children: [
+        TextFormField(),
+      ]),
     );
   }
 }
