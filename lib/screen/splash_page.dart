@@ -1,3 +1,4 @@
+import 'package:admin_panel/screen/sing_in_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -42,7 +43,7 @@ class SplashPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.36,
                   vertical: MediaQuery.of(context).size.height * 0.02),
-              child: Text(
+              child: const Text(
                 "SIGN UP",
                 style: TextStyle(
                     color: Color(0xff0B23AC),
@@ -52,10 +53,10 @@ class SplashPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Text(
+          const Text(
             "Already a Member?",
             style: TextStyle(
               fontSize: 16,
@@ -63,12 +64,18 @@ class SplashPage extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignInPage(),
+                  ));
+            },
             child: Container(
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.376,
                   vertical: MediaQuery.of(context).size.height * 0.02),
-              child: Text(
+              child: const Text(
                 "Sign In",
                 style: TextStyle(
                     color: Color(0xffEAEAEA),
