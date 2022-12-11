@@ -20,7 +20,14 @@ class _SignInPageState extends State<SignInPage> {
         backgroundColor: Colors.cyan,
         centerTitle: true,
         elevation: 0,
-        title: const Text("Sign In Page"),
+        title: const Text(
+          "Sign In Page",
+          style: TextStyle(
+              color: Color(0xffEAEAEA),
+              fontSize: 20,
+              fontFamily: "Nunito",
+              fontWeight: FontWeight.bold),
+        ),
       ),
       body: Container(
         margin: const EdgeInsets.all(16),
@@ -37,6 +44,7 @@ class _SignInPageState extends State<SignInPage> {
               },
               decoration: InputDecoration(
                 hintText: "Email",
+                labelText: "Email",
                 prefixIcon: Icon(Icons.email_rounded),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(24)),
@@ -56,6 +64,7 @@ class _SignInPageState extends State<SignInPage> {
               },
               decoration: InputDecoration(
                   hintText: "Password",
+                  labelText: "Password",
                   prefixIcon: Icon(Icons.password_rounded),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24)),
