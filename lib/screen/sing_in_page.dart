@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatelessWidget with ValidationMixin {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
@@ -23,6 +23,12 @@ class SignInPage extends StatelessWidget {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             TextFormField(
               controller: emailController,
+              validator: (email) {
+                if (isEmailValid(email!)) {
+                  return null;
+                } else
+                  return 'Enter a valid email address';
+              },
               decoration: InputDecoration(
                 hintText: "Email",
                 prefixIcon: Icon(Icons.email_rounded),
@@ -35,6 +41,13 @@ class SignInPage extends StatelessWidget {
             ),
             TextFormField(
               controller: passwordController,
+              obscureText: true,
+              validator: (password) {
+                if (isPasswordValid(password!))
+                  return null;
+                else
+                  return 'Enter a valid password';
+              },
               decoration: InputDecoration(
                 hintText: "Password",
                 prefixIcon: Icon(Icons.password_rounded),
@@ -55,7 +68,15 @@ class SignInPage extends StatelessWidget {
                         elevation: MaterialStateProperty.all(0),
                         backgroundColor:
                             MaterialStateProperty.all(const Color(0xff3a67d8))),
-                    onPressed: () {},
+                    onPressed: () {
+                      // if (_formKey.currentState.validate()) {
+                      //   _formKey.currentState.save();
+                      //   // use the email provided here
+                      // }
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
+                    },
                     child: const Text(
                       "Sign In",
                       style: TextStyle(
@@ -68,5 +89,16 @@ class SignInPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+mixin ValidationMixin {
+  bool isPasswordValid(String password) => password.length >= 6;
+
+  bool isEmailValid(String email) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = RegExp(pattern.toString());
+    return regex.hasMatch(email);
   }
 }
