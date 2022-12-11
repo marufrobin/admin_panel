@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget with ValidationMixin {
+class SignInPage extends StatefulWidget with ValidationMixin {
   const SignInPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    bool isObscureText = true;
     return Scaffold(
       // backgroundColor: Color(0xff3a67d8),
       appBar: AppBar(
@@ -24,7 +30,7 @@ class SignInPage extends StatelessWidget with ValidationMixin {
             TextFormField(
               controller: emailController,
               validator: (email) {
-                if (isEmailValid(email!)) {
+                if (widget.isEmailValid(email!)) {
                   return null;
                 } else
                   return 'Enter a valid email address';
@@ -41,19 +47,28 @@ class SignInPage extends StatelessWidget with ValidationMixin {
             ),
             TextFormField(
               controller: passwordController,
-              obscureText: true,
+              obscureText: isObscureText,
               validator: (password) {
-                if (isPasswordValid(password!))
+                if (widget.isPasswordValid(password!))
                   return null;
                 else
                   return 'Enter a valid password';
               },
               decoration: InputDecoration(
-                hintText: "Password",
-                prefixIcon: Icon(Icons.password_rounded),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(24)),
-              ),
+                  hintText: "Password",
+                  prefixIcon: Icon(Icons.password_rounded),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24)),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isObscureText == true
+                            ? isObscureText = false
+                            : isObscureText = true;
+                      });
+                    },
+                    icon: Icon(Icons.remove_red_eye_rounded),
+                  )),
             ),
             const SizedBox(
               height: 16,
