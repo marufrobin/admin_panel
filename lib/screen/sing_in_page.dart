@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:admin_panel/screen/bottom_nav_bar.dart';
+import 'package:admin_panel/widget/common_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,14 +44,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
             (route) => false);
       } else {
-        Fluttertoast.showToast(
-            msg: "Email or Password are incorrect.",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showingMsgInToast(msg: "Email or Password are incorrect.");
       }
     } catch (error) {
       print(error);
