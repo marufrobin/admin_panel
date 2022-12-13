@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:admin_panel/screen/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends StatefulWidget with ValidationMixin {
   const SignInPage({Key? key}) : super(key: key);
@@ -13,7 +19,43 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController = TextEditingController();
   bool isObscureText = true;
   facthingTokenData() async {
-    try{}catch(error){print(error)}
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      String baseUrl = "https://apihomechef.antopolis.xyz/api/admin/";
+      String signInUrl = "${baseUrl}sign-in";
+
+      Map<String, dynamic> map = {
+        'email': emailController.text.toString(),
+        'password': passwordController.text.toString(),
+      };
+
+      var responce = await http.post(Uri.parse(signInUrl), body: map);
+      var data = jsonDecode(responce.body);
+
+      if (data['access_token'] != null) {
+        sharedPreferences.setString("token", data['access_token']);
+
+        print("Token:::::::::::${sharedPreferences.getString("token")}");
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BottomNavBar(),
+            ),
+            (route) => false);
+      } else {
+        Fluttertoast.showToast(
+            msg: "Email or Password are incorrect.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    } catch (error) {
+      print(error);
+    }
   }
 
   // @override
