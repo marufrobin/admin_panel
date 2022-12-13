@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends StatefulWidget with ValidationMixin {
   const SignInPage({Key? key}) : super(key: key);
@@ -8,12 +12,36 @@ class SignInPage extends StatefulWidget with ValidationMixin {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isObscureText = false;
+  facthingTokenData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String baseUrl = "https://apihomechef.antopolis.xyz/api/admin/";
+    String signInUrl = "${baseUrl}sign-in";
+
+    Map<String, dynamic> map = {
+      'email': emailController.text.toString(),
+      'password': passwordController.text.toString(),
+    };
+
+    var responce = await http.post(Uri.parse(signInUrl), body: map);
+    var data = jsonDecode(responce.body);
+    sharedPreferences.setString("token", data['access_token']);
+
+    print("Token:::::::::::${sharedPreferences.getString("token")}");
+  }
+
+  // @override
+  // void initState() {
+  //   facthingTokenData();
+  //   // TODO: implement initState
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    bool isObscureText = true;
     return Scaffold(
       // backgroundColor: Color(0xff3a67d8),
       appBar: AppBar(
@@ -71,9 +99,8 @@ class _SignInPageState extends State<SignInPage> {
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
-                        isObscureText == true
-                            ? isObscureText = false
-                            : isObscureText = true;
+                        isObscureText = !isObscureText;
+                        setState(() {});
                       });
                     },
                     icon: Icon(Icons.remove_red_eye_rounded),
@@ -99,6 +126,7 @@ class _SignInPageState extends State<SignInPage> {
                       // }
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
+                        facthingTokenData();
                       }
                     },
                     child: const Text(
@@ -117,7 +145,7 @@ class _SignInPageState extends State<SignInPage> {
 }
 
 mixin ValidationMixin {
-  bool isPasswordValid(String password) => password.length >= 6;
+  bool isPasswordValid(String password) => password.length >= 4;
 
   bool isEmailValid(String email) {
     Pattern pattern =

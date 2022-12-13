@@ -1,1 +1,3 @@
-class CustomHttp {}
+class CustomHttp {
+  Future<CustomHttp> fatchingData() async {}
+}
