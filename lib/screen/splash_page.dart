@@ -1,82 +1,63 @@
-import 'package:admin_panel/screen/sing_in_page.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class SplashPage extends StatelessWidget {
+import 'package:admin_panel/screen/bottom_nav_bar.dart';
+import 'package:admin_panel/screen/welcome.dart';
+import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  isLogin() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    if (sharedPreferences.getString("tokan") == null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => WellcomePage(),
+          ),
+          (route) => false);
+    } else {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => BottomNavBar(),
+          ),
+          (route) => false);
+    }
+  }
+
+  @override
+  void initState() {
+    Timer(Duration(seconds: 2), () {
+      isLogin();
+    });
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff3a67d8),
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      //   centerTitle: true,
-      //   title: Text("Splash page"),
-      // ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(child: SizedBox()),
-          Expanded(
-              flex: 6,
-              child: Image.asset(
-                "images/dokanlogo.png",
-              )),
-          ElevatedButton(
-            style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                backgroundColor: MaterialStateProperty.all(Color(0xffEAEAEA)),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24)))),
-            onPressed: () {},
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.36,
-                  vertical: MediaQuery.of(context).size.height * 0.02),
-              child: const Text(
-                "SIGN UP",
-                style: TextStyle(
-                    color: Color(0xff0B23AC),
-                    fontSize: 16,
-                    fontFamily: "Nunito",
-                    fontWeight: FontWeight.bold),
-              ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "images/dokanlogo.png",
             ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          const Text(
-            "Already a Member?",
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: "Nunito",
+            LoadingAnimationWidget.dotsTriangle(
+              color: Colors.white,
+              size: 60,
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SignInPage(),
-                  ));
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.376,
-                  vertical: MediaQuery.of(context).size.height * 0.02),
-              child: const Text(
-                "Sign In",
-                style: TextStyle(
-                    color: Color(0xffEAEAEA),
-                    fontSize: 16,
-                    fontFamily: "Nunito",
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
