@@ -51,30 +51,9 @@ class _SignInPageState extends State<SignInPage> {
     }
   }
 
-  // @override
-  // void initState() {
-  //   facthingTokenData();
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(0xff3a67d8),
-      // appBar: AppBar(
-      //   backgroundColor: Colors.cyan,
-      //   centerTitle: true,
-      //   elevation: 0,
-      //   title: const Text(
-      //     "Sign In Page",
-      //     style: TextStyle(
-      //         color: Color(0xffEAEAEA),
-      //         fontSize: 20,
-      //         fontFamily: "Nunito",
-      //         fontWeight: FontWeight.bold),
-      //   ),
-      // ),
       body: Stack(
         children: [
           const Positioned(
@@ -91,17 +70,7 @@ class _SignInPageState extends State<SignInPage> {
               child: Image.asset(
                 "images/dokanlogo.png",
                 scale: 1.2,
-              )
-              /*Text(
-                "DOKAN",
-                style: TextStyle(
-                    color: Color(0xffEAEAEA),
-                    fontSize: 36,
-                    fontFamily: "Nunito",
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic),
-              )*/
-              ),
+              )),
           SafeArea(
             child: Container(
               margin: const EdgeInsets.all(16),
