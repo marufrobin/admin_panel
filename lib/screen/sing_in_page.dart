@@ -105,11 +105,7 @@ class _SignInPageState extends State<SignInPage> {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.30,
                         ),
-                        // Spacer(),
-                        // Expanded(
-                        //     child: SizedBox(
-                        //   height: MediaQuery.of(context).size.height * 0.4,
-                        // )),
+
                         TextFormField(
                           controller: emailController,
                           validator: (email) {
