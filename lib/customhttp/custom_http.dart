@@ -1,3 +1,3 @@
 class CustomHttp {
-  Future<CustomHttp> fatchingData() async {}
+  // static Future<CustomHttp> fatchingData() async {}
 }
