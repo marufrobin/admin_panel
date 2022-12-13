@@ -41,6 +41,7 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   fade_shimmer: ^2.2.0
   bottom_navy_bar: ^6.0.0
+  fluttertoast: ^8.1.2
 
 dev_dependencies:
   flutter_test:

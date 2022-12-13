@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends StatefulWidget with ValidationMixin {
   const SignInPage({Key? key}) : super(key: key);
@@ -17,20 +13,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController = TextEditingController();
   bool isObscureText = true;
   facthingTokenData() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String baseUrl = "https://apihomechef.antopolis.xyz/api/admin/";
-    String signInUrl = "${baseUrl}sign-in";
-
-    Map<String, dynamic> map = {
-      'email': emailController.text.toString(),
-      'password': passwordController.text.toString(),
-    };
-
-    var responce = await http.post(Uri.parse(signInUrl), body: map);
-    var data = jsonDecode(responce.body);
-    sharedPreferences.setString("token", data['access_token']);
-
-    print("Token:::::::::::${sharedPreferences.getString("token")}");
+    try{}catch(error){print(error)}
   }
 
   // @override
