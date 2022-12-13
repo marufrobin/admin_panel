@@ -8,12 +8,12 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff3a67d8),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text("Splash page"),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   centerTitle: true,
+      //   title: Text("Splash page"),
+      // ),
       body: Column(
         children: [
           const Expanded(
@@ -30,8 +30,7 @@ class SplashPage extends StatelessWidget {
           Expanded(
               flex: 4,
               child: Image.asset(
-                "images/r.png",
-                scale: 2,
+                "images/dokanlogo.png",
               )),
           ElevatedButton(
             style: ButtonStyle(

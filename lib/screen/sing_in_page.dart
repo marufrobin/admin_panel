@@ -77,7 +77,7 @@ class _SignInPageState extends State<SignInPage> {
       // ),
       body: Stack(
         children: [
-          Positioned(
+          const Positioned(
             top: -360,
             left: -100,
             child: CircleAvatar(
@@ -86,13 +86,22 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.width * 0.2,
-            left: MediaQuery.of(context).size.width * 0.34,
-            child: Image.asset(
-              "images/r.png",
-              scale: 4,
-            ),
-          ),
+              top: MediaQuery.of(context).size.width * 0.12,
+              left: MediaQuery.of(context).size.width * 0.08,
+              child: Image.asset(
+                "images/dokanlogo.png",
+                scale: 1.2,
+              )
+              /*Text(
+                "DOKAN",
+                style: TextStyle(
+                    color: Color(0xffEAEAEA),
+                    fontSize: 36,
+                    fontFamily: "Nunito",
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic),
+              )*/
+              ),
           SafeArea(
             child: Container(
               margin: const EdgeInsets.all(16),
@@ -117,7 +126,7 @@ class _SignInPageState extends State<SignInPage> {
                           decoration: InputDecoration(
                             hintText: "Email",
                             labelText: "Email",
-                            prefixIcon: Icon(Icons.email_rounded),
+                            prefixIcon: const Icon(Icons.email_rounded),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(24)),
                           ),
@@ -129,15 +138,16 @@ class _SignInPageState extends State<SignInPage> {
                           controller: passwordController,
                           obscureText: isObscureText,
                           validator: (password) {
-                            if (widget.isPasswordValid(password!))
+                            if (widget.isPasswordValid(password!)) {
                               return null;
-                            else
+                            } else {
                               return 'Enter a valid password';
+                            }
                           },
                           decoration: InputDecoration(
                               hintText: "Password",
                               labelText: "Password",
-                              prefixIcon: Icon(Icons.password_rounded),
+                              prefixIcon: const Icon(Icons.password_rounded),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24)),
                               suffixIcon: IconButton(
@@ -148,8 +158,8 @@ class _SignInPageState extends State<SignInPage> {
                                   });
                                 },
                                 icon: isObscureText == true
-                                    ? Icon(Icons.visibility_rounded)
-                                    : Icon(Icons.visibility_off_rounded),
+                                    ? const Icon(Icons.visibility_rounded)
+                                    : const Icon(Icons.visibility_off_rounded),
                               )),
                         ),
                         const SizedBox(
