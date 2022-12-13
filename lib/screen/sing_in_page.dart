@@ -15,7 +15,7 @@ class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool isObscureText = false;
+  bool isObscureText = true;
   facthingTokenData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String baseUrl = "https://apihomechef.antopolis.xyz/api/admin/";
@@ -103,7 +103,9 @@ class _SignInPageState extends State<SignInPage> {
                         setState(() {});
                       });
                     },
-                    icon: Icon(Icons.remove_red_eye_rounded),
+                    icon: isObscureText == true
+                        ? Icon(Icons.visibility_rounded)
+                        : Icon(Icons.visibility_off_rounded),
                   )),
             ),
             const SizedBox(
