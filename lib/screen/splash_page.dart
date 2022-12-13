@@ -15,20 +15,11 @@ class SplashPage extends StatelessWidget {
       //   title: Text("Splash page"),
       // ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Expanded(
-            flex: 1,
-            child: Text(
-              "Wellcome to My App",
-              style: TextStyle(
-                color: Color(0xffEAEAEA),
-                fontSize: 36,
-                fontFamily: "Nunito",
-              ),
-            ),
-          ),
+          Expanded(child: SizedBox()),
           Expanded(
-              flex: 4,
+              flex: 6,
               child: Image.asset(
                 "images/dokanlogo.png",
               )),
