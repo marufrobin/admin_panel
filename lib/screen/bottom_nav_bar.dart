@@ -2,6 +2,7 @@ import 'package:admin_panel/pages/category.dart';
 import 'package:admin_panel/pages/oder_page.dart';
 import 'package:admin_panel/pages/product_page.dart';
 import 'package:admin_panel/pages/user_profile.dart';
+import 'package:admin_panel/widget/common_widget.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -47,6 +48,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
       ),
       bottomNavigationBar: BottomNavyBar(
+        // backgroundColor: Color(0xff7289CD).,
+        showElevation: false,
         selectedIndex: _currentIndex,
         onItemSelected: (index) {
           setState(() => _currentIndex = index);
@@ -54,14 +57,47 @@ class _BottomNavBarState extends State<BottomNavBar> {
         },
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
-              title: Text('Order'), icon: Icon(Icons.shopping_cart)),
+              // inactiveColor: Color(0xff7289CD),
+              activeColor: Color(0xff7289CD),
+              textAlign: TextAlign.justify,
+              title: Text(
+                'Order',
+                style: buildTextStyle(16, Color(0xff1C58C9), FontWeight.bold),
+              ),
+              icon: Icon(
+                Icons.shopping_cart,
+                color: Color(0xff1C58C9),
+              )),
           BottomNavyBarItem(
-              title: Text('Category'), icon: Icon(Icons.category_rounded)),
+              activeColor: Color(0xff7289CD),
+              title: Text(
+                'Category',
+                style: buildTextStyle(16, Color(0xff1C58C9), FontWeight.bold),
+              ),
+              icon: Icon(
+                Icons.category_rounded,
+                color: Color(0xff1C58C9),
+              )),
           BottomNavyBarItem(
-              title: Text('Product'), icon: Icon(Icons.gif_box_rounded)),
+              activeColor: Color(0xff7289CD),
+              title: Text(
+                'Product',
+                style: buildTextStyle(16, Color(0xff1C58C9), FontWeight.bold),
+              ),
+              icon: Icon(
+                Icons.gif_box_rounded,
+                color: Color(0xff1C58C9),
+              )),
           BottomNavyBarItem(
-              title: Text('Profile'),
-              icon: Icon(Icons.person_outline_outlined)),
+              activeColor: Color(0xff7289CD),
+              title: Text(
+                'Profile',
+                style: buildTextStyle(16, Color(0xff1C58C9), FontWeight.bold),
+              ),
+              icon: Icon(
+                Icons.person_outline_outlined,
+                color: Color(0xff1C58C9),
+              )),
         ],
       ),
     );

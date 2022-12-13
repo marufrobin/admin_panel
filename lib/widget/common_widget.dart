@@ -13,3 +13,11 @@ showingMsgInToast({required String msg}) {
       textColor: Colors.white,
       fontSize: 16.0);
 }
+
+TextStyle buildTextStyle(double fntSize, Color clr, FontWeight fontWeight) {
+  return TextStyle(
+      color: clr,
+      fontSize: fntSize,
+      fontFamily: "Nunito",
+      fontWeight: fontWeight);
+}
