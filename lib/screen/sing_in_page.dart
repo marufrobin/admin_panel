@@ -18,8 +18,12 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isObscureText = true;
+  bool? isLoading;
   facthingTokenData() async {
     try {
+      setState(() {
+        isLoading = true;
+      });
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       String baseUrl = "https://apihomechef.antopolis.xyz/api/admin/";
@@ -32,7 +36,16 @@ class _SignInPageState extends State<SignInPage> {
 
       var responce = await http.post(Uri.parse(signInUrl), body: map);
       var data = jsonDecode(responce.body);
-
+      // BlurryContainer.expand(
+      //   blur: 6,
+      //   child: LoadingAnimationWidget.dotsTriangle(
+      //     color: Colors.white,
+      //     size: 60,
+      //   ),
+      // );
+      setState(() {
+        isLoading = false;
+      });
       if (data['access_token'] != null) {
         sharedPreferences.setString("token", data['access_token']);
 
@@ -151,8 +164,10 @@ class _SignInPageState extends State<SignInPage> {
                                   //   _formKey.currentState.save();
                                   //   // use the email provided here
                                   // }
+
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
+
                                     facthingTokenData();
                                   }
                                 },
